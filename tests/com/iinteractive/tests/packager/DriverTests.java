@@ -1,4 +1,4 @@
-package com.iinteractive.packager;
+package com.iinteractive.tests.packager;
 
 import static org.junit.Assert.*;
 
@@ -9,6 +9,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import com.iinteractive.commandline.beans.CommandLineProperty;
+import com.iinteractive.packager.Driver;
 import com.iinteractive.packager.beans.Operation;
 import com.iinteractive.tests.commandline.CommandLinePropertyFactoryTests;
 
