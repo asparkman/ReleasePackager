@@ -1,4 +1,4 @@
-package com.iinteractive.tests.commandline;
+package com.iinteractive.commandline;
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package com.iinteractive.tests.packager.beans;
+package com.iinteractive.packager.beans;
 
 import static org.junit.Assert.*;
 

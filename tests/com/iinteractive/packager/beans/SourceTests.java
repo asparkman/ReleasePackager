@@ -1,4 +1,4 @@
-package com.iinteractive.tests.packager.beans;
+package com.iinteractive.packager.beans;
 
 import junit.framework.Assert;
 

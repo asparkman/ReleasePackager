@@ -1,4 +1,4 @@
-package com.iinteractive.tests.commandline.beans;
+package com.iinteractive.commandline.beans;
 
 import junit.framework.Assert;
 

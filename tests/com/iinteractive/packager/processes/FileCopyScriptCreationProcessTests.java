@@ -1,4 +1,4 @@
-package com.iinteractive.tests.packager.processes;
+package com.iinteractive.packager.processes;
 
 import static org.junit.Assert.*;
 

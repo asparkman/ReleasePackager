@@ -1,4 +1,4 @@
-package com.iinteractive.tests.utility;
+package com.iinteractive.utility;
 
 import java.io.File;
 import java.io.IOException;
