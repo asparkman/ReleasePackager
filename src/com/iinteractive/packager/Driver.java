@@ -53,6 +53,14 @@ public class Driver {
 			}
 		}
 		
+		for(int i = 0; i < properties.size(); i++) {
+			for(int j = i + 1; j < properties.size(); j++) {
+				if(properties.get(i).equals(properties.get(j))) {
+					throw new Exception("Duplicate command line argument found: " + properties.get(i).toString());
+				}
+			}
+		}
+		
 		if(propertiesRetrieved) {
 			return properties;
 		} else {

@@ -51,15 +51,37 @@ public class PackageProcess implements IProcess {
 		Scanner reader = new Scanner(new BufferedReader(new FileReader(operationFile)));
 		
 		if(reader.hasNextLine()) {
-			source = new Source(reader.nextLine());
+			String sourceDir = reader.nextLine();
+			try {
+				Source.validateSourceDirectory(sourceDir);
+			} catch(Exception ex) {
+				reader.close();
+				throw ex;
+			}
+			source = new Source(sourceDir);
+		} else {
+			reader.close();
+			throw new IllegalArgumentException("The operation file is missing content.");
 		}
 		if(reader.hasNextLine()) {
-			pack = new Package(reader.nextLine());
+			String packDir = reader.nextLine();
+			try {
+				Package.validatePackageDirectory(packDir);
+			} catch(Exception ex) {
+				reader.close();
+				throw ex;
+			}
+			pack = new Package(packDir);
+		} else {
+			reader.close();
+			throw new IllegalArgumentException("The operation file is missing content.");
 		}
 		
 		while(reader.hasNextLine()) {
 			changedFiles.add(reader.nextLine());
 		}
+		
+		reader.close();
 		
 		ArrayList<File> srcFiles = new ArrayList<File>();
 		ArrayList<File> destFiles = new ArrayList<File>();

@@ -4,7 +4,6 @@ import com.iinteractive.packager.beans.Operation;
 
 public class ProcessFactory {
 	public enum ProcessDefinition {
-		MERGE,
 		PACKAGE
 	}
 	
@@ -13,8 +12,6 @@ public class ProcessFactory {
 		for(ProcessDefinition definition : definitions) {
 			if(definition.name().equalsIgnoreCase(operation.getOperation().getValue())) {
 				switch(definition) {
-					case MERGE:
-						return new MergeProcess(operation.getOperationFile().getValue());
 					case PACKAGE:
 						return new PackageProcess(operation.getOperationFile().getValue());
 					default:
