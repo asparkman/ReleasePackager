@@ -131,7 +131,7 @@ class FileCopyManagerTests extends TestCase {
 		suite.addTest(new FileCopyManagerTests(tc.toString(), FileCopyManager.NUM_THREADS * 2 + 1, default_file_size, tc++));
 		
 		suite.addTest(new FileCopyManagerTests(tc.toString(), FileCopyManager.NUM_THREADS * 100, default_file_size, tc++));
-		suite.addTest(new FileCopyManagerTests(tc.toString(), FileCopyManager.NUM_THREADS, FileCopier.BUFFER_SIZE * 2000, tc++))
+		suite.addTest(new FileCopyManagerTests(tc.toString(), FileCopyManager.NUM_THREADS, FileCopier.BUFFER_SIZE * 2000, tc++));
 		
 		return suite;
 	}

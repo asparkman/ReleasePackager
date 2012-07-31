@@ -19,4 +19,9 @@ public class FileCopy {
 		this.src = src;
 		this.dest = dest;
 	}
+
+	@Override
+	public String toString() {
+		return "[src=" + src + ", dest=" + dest + "]";
+	}	
 }

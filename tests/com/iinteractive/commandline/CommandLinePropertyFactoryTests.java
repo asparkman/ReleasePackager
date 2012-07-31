@@ -1,21 +1,18 @@
 package com.iinteractive.commandline;
 
-import static org.junit.Assert.*;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import junit.framework.Assert;
-
-import org.junit.Test;
+import junit.framework.TestCase;
 
 import com.iinteractive.commandline.CommandLinePropertyFactory;
 import com.iinteractive.commandline.beans.CommandLineProperty;
 import com.iinteractive.commandline.beans.CommandLinePropertyType;
+import com.iinteractive.packager.exceptions.ProcessInitFailure;
 
-public class CommandLinePropertyFactoryTests {
+public class CommandLinePropertyFactoryTests extends TestCase {
 
-	@Test
 	public void testAddCommandLinePropertyType() {
 		
 	}
@@ -27,7 +24,6 @@ public class CommandLinePropertyFactoryTests {
 	 * 		2
 	 * }
 	 */
-	@Test
 	public void testInstantiateProperty() {
 		boolean pass = true;
 		
@@ -37,15 +33,11 @@ public class CommandLinePropertyFactoryTests {
 		String input0 = "";
 		String input1and2 = "ABC";
 		
-		CommandLineProperty output0 = null;
-		CommandLineProperty output1 = null;
-		CommandLineProperty output2 = null;
-		
 		// Test0
 		CommandLinePropertyFactory.AddCommandLinePropertyType(type1);
 		try {
 			CommandLinePropertyFactory.InstantiateProperty(input0);
-		} catch (Exception e1) {
+		} catch (ProcessInitFailure e1) {
 		}
 		try {
 			clearFactoryTypes();
@@ -57,7 +49,7 @@ public class CommandLinePropertyFactoryTests {
 		CommandLinePropertyFactory.AddCommandLinePropertyType(type1);
 		try {
 			CommandLinePropertyFactory.InstantiateProperty(input1and2);
-		} catch (Exception e1) {
+		} catch (ProcessInitFailure e1) {
 			pass = false;
 		}
 		try {
@@ -72,7 +64,7 @@ public class CommandLinePropertyFactoryTests {
 		try {
 			CommandLinePropertyFactory.InstantiateProperty(input1and2);
 			pass = false;
-		} catch (Exception e1) {
+		} catch (ProcessInitFailure e1) {
 		}
 		try {
 			clearFactoryTypes();

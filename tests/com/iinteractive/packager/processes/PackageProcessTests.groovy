@@ -15,6 +15,7 @@ import junit.framework.TestSuite
 
 import junit.framework.TestCase;
 
+import com.iinteractive.packager.exceptions.ProcessFailure
 import com.iinteractive.packager.processes.PackageProcess;
 
 public class PackageProcessTests extends TestCase {
@@ -130,7 +131,7 @@ public class PackageProcessTests extends TestCase {
 		try {
 			process.process()
 			assert true
-		} catch(Exception ex) {
+		} catch(ProcessFailure ex) {
 			fail()
 		}
 	}
@@ -156,7 +157,7 @@ public class PackageProcessTests extends TestCase {
 		try {
 			process.process()
 			fail()
-		} catch(Exception ex) {
+		} catch(ProcessFailure ex) {
 			assert true
 		}
 	}

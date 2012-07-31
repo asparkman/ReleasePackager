@@ -7,14 +7,18 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 
 import com.iinteractive.packager.beans.FileCopy;
+import com.iinteractive.packager.exceptions.FileCopyFailure;
 
+/**
+ * A consumer of FileCopy operations.
+ * @author Alex Sparkman
+ *
+ */
 public class FileCopier implements Runnable {
 	public static final int BUFFER_SIZE = 1024;
 	
 	public FileCopy copy;
 	
-	
-
 	@Override
 	public void run() {
 		while(retrieveFileCopy()) {
@@ -31,9 +35,9 @@ public class FileCopier implements Runnable {
 				}
 				
 			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+				FileCopyManager.addFailure(new FileCopyFailure(copy, e));
 			} catch (IOException e) {
-				e.printStackTrace();
+				FileCopyManager.addFailure(new FileCopyFailure(copy, e));
 			} finally {
 				if(input != null) {
 					try {

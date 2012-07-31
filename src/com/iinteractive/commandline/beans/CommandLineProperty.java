@@ -1,5 +1,7 @@
 package com.iinteractive.commandline.beans;
 
+import com.iinteractive.packager.exceptions.ProcessInitFailure;
+
 /**
  * The purpose of this class is to house functionality associated with the 
  * reading of command line arguments.
@@ -7,7 +9,9 @@ package com.iinteractive.commandline.beans;
  *
  */
 public class CommandLineProperty {
-	public CommandLineProperty(CommandLinePropertyType type, String value) throws Exception {
+	public static final String CMD_LINE_MATCH_FAILURE = "The value does not match the correct CommandLinePropertyType.";
+	
+	public CommandLineProperty(CommandLinePropertyType type, String value) throws ProcessInitFailure {
 		super();
 		this.type = type;
 		setValue(value);
@@ -35,11 +39,12 @@ public class CommandLineProperty {
 	 * Takes a string of the form: prefix + argumentName + suffix + value.  It
 	 * sets the value property equal to what is found.
 	 * @param value
+	 * @throws ProcessInitFailure 
 	 * @throws Exception 
 	 */
-	public void setValue(String value) throws Exception {
+	public void setValue(String value) throws ProcessInitFailure {
 		if(!value.startsWith(type.getPrefix() + type.getArgumentName() + type.getSuffix())) {
-			throw new Exception("The value does not match the correct CommandLinePropertyType.");
+			throw new ProcessInitFailure(CMD_LINE_MATCH_FAILURE);
 		}
 		int prefixLength = type.getPrefix().length() + type.getArgumentName().length() + type.getSuffix().length();
 		this.value = value.substring(prefixLength);

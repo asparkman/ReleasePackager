@@ -1,16 +1,15 @@
 package com.iinteractive.packager.beans;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 
 import junit.framework.Assert;
+import junit.framework.TestCase;
 
-import org.junit.Test;
 import com.iinteractive.commandline.beans.*;
 import com.iinteractive.packager.beans.Operation;
+import com.iinteractive.packager.exceptions.ProcessInitFailure;
 
-public class OperationTests {
+public class OperationTests extends TestCase {
 
 	/*
 	 * Test Inputs:
@@ -22,7 +21,6 @@ public class OperationTests {
 	 *		3
 	 *	} 
 	 */
-	@Test
 	public void testOperation() {
 		CommandLinePropertyType type1 = Operation.OPERATION_FILE_TYPE;
 		CommandLinePropertyType type2 = Operation.OPERATION_TYPE;
@@ -36,7 +34,7 @@ public class OperationTests {
 			prop1 = new CommandLineProperty(type1, "-DOperationFile=");
 			prop2 = new CommandLineProperty(type2, "-DOperation=");
 			prop3 = new CommandLineProperty(type3, "ABC");
-		} catch (Exception e1) {
+		} catch (ProcessInitFailure e1) {
 			fail("Initialization of CommandLineProperty object failed.");
 		}
 		
@@ -77,7 +75,7 @@ public class OperationTests {
 			testNull = new Operation(inputNull);
 			pass = false;
 		} catch (NullPointerException e) {
-		} catch (Exception e) {
+		} catch (ProcessInitFailure e) {
 			pass = false;
 		}
 		
@@ -86,7 +84,7 @@ public class OperationTests {
 			pass = false;
 		} catch (NullPointerException e) {
 			pass = false;
-		} catch (Exception e) {
+		} catch (ProcessInitFailure e) {
 		}
 		
 		try {
@@ -94,14 +92,14 @@ public class OperationTests {
 			pass = false;
 		} catch (NullPointerException e) {
 			pass = false;
-		} catch (Exception e) {
+		} catch (ProcessInitFailure e) {
 		}
 		
 		try {
 			test2a = new Operation(input2a);
 		} catch (NullPointerException e) {
 			pass = false;
-		} catch (Exception e) {
+		} catch (ProcessInitFailure e) {
 			pass = false;
 		}
 		
@@ -110,7 +108,7 @@ public class OperationTests {
 			pass = false;
 		} catch (NullPointerException e) {
 			pass = false;
-		} catch (Exception e) {
+		} catch (ProcessInitFailure e) {
 		}
 		
 		try {
@@ -118,7 +116,7 @@ public class OperationTests {
 			pass = false;
 		} catch (NullPointerException e) {
 			pass = false;
-		} catch (Exception e) {
+		} catch (ProcessInitFailure e) {
 		}
 		
 		Assert.assertTrue(pass);

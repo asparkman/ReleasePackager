@@ -14,6 +14,7 @@ import com.iinteractive.commandline.CommandLinePropertyFactoryTests;
 import com.iinteractive.commandline.beans.CommandLineProperty;
 import com.iinteractive.packager.Driver;
 import com.iinteractive.packager.beans.Operation;
+import com.iinteractive.packager.exceptions.ProcessInitFailure
 
 public class DriverTests extends TestCase {
 	public String[] input;
@@ -47,7 +48,7 @@ public class DriverTests extends TestCase {
 		try {
 			actualOutput = Driver.GetProperties(input);
 			assert !exceptionExpected
-		} catch(Exception ex) {
+		} catch(ProcessInitFailure ex) {
 			ex.printStackTrace()
 			assert exceptionExpected;
 		}

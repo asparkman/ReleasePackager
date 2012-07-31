@@ -1,14 +1,24 @@
 package com.iinteractive.packager;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
+import org.apache.log4j.Logger;
 
 import com.iinteractive.commandline.CommandLinePropertyFactory;
 import com.iinteractive.commandline.beans.CommandLineProperty;
 import com.iinteractive.packager.beans.Operation;
+import com.iinteractive.packager.exceptions.ProcessFailure;
+import com.iinteractive.packager.exceptions.ProcessInitFailure;
 import com.iinteractive.packager.processes.IProcess;
 import com.iinteractive.packager.processes.ProcessFactory;
 
 public class Driver {
+	public static Logger logger = Logger.getLogger(Driver.class.getName());
+	
+	public static final String DUPLICATE_CMD_LINE_ARG = "Duplicate command line argument found: ";
+	public static final String CMD_LINE_INTERPRETATION_ERROR = "Failed to interpret command line arguments.";
 
 	/**
 	 * Wrapper for the EntryPoint function.
@@ -32,14 +42,21 @@ public class Driver {
 			Operation operation = new Operation(properties);
 			IProcess process = ProcessFactory.RetrieveProcess(operation);
 			process.process();
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (ProcessFailure e) {
+			Collection<ProcessFailure> failures = e.generateExceptions();
+			Iterator<ProcessFailure> iterator = failures.iterator();
+			while(iterator.hasNext()) {
+				ProcessFailure failure = iterator.next();
+				logger.error(failure);
+			}
+		} catch(ProcessInitFailure e) {
+			logger.error(e);
 		}
 		
 		
 	}
 	
-	public static ArrayList<CommandLineProperty> GetProperties(String[] args) throws Exception {
+	public static ArrayList<CommandLineProperty> GetProperties(String[] args) throws ProcessInitFailure {
 		AssignCommandLinePropertyTypes();
 		
 		ArrayList<CommandLineProperty> properties = new ArrayList<CommandLineProperty>();
@@ -56,7 +73,7 @@ public class Driver {
 		for(int i = 0; i < properties.size(); i++) {
 			for(int j = i + 1; j < properties.size(); j++) {
 				if(properties.get(i).equals(properties.get(j))) {
-					throw new Exception("Duplicate command line argument found: " + properties.get(i).toString());
+					throw new ProcessInitFailure(DUPLICATE_CMD_LINE_ARG + properties.get(i).toString());
 				}
 			}
 		}
@@ -64,7 +81,7 @@ public class Driver {
 		if(propertiesRetrieved) {
 			return properties;
 		} else {
-			throw new Exception("Failed to interpret command line arguments.");
+			throw new ProcessInitFailure(CMD_LINE_INTERPRETATION_ERROR);
 		}
 	}
 	

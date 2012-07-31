@@ -3,17 +3,18 @@ package com.iinteractive.packager.processes;
 import java.io.File;
 
 import junit.framework.Assert;
+import junit.framework.TestCase
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.iinteractive.packager.exceptions.FolderCreationFailure
 import com.iinteractive.packager.processes.FolderCreationProcess;
 
-public class FolderCreationProcessTests {
+public class FolderCreationProcessTests extends TestCase {
 
-	@Before
-	public void cleanUp() {
+	public void setUp() {
 		File baseDir = new File("JUnitTestFolders");
 		if(baseDir.isDirectory()) {
 			File[] files = baseDir.listFiles();
@@ -28,8 +29,7 @@ public class FolderCreationProcessTests {
 		assert new File("JUnitTestFolders\\testFiveD1").mkdirs();
 	}
 	
-	@After
-	public void cleanUp2() {
+	public void tearDown() {
 		File baseDir = new File("JUnitTestFolders");
 		if(baseDir.isDirectory()) {
 			File[] files = baseDir.listFiles();
@@ -53,7 +53,6 @@ public class FolderCreationProcessTests {
 	/**
 	 * exists() / !exists() / !exists()
 	 */
-	@Test
 	public void testOneCreateFolder() {
 		File file = new File("JUnitTestFolders\\testOneD1\\testOneD2\\file.txt");
 		boolean pass = true;
@@ -63,7 +62,7 @@ public class FolderCreationProcessTests {
 		pass = pass && !file.getParentFile().getParentFile().exists();
 		pass = pass && file.getParentFile().getParentFile().getParentFile().exists();
 		
-		pass = pass && FolderCreationProcess.CreateFolder(file);
+		FolderCreationProcess.CreateFolder(file);
 		
 		pass = pass && !file.exists();
 		pass = pass && file.getParentFile().exists();
@@ -76,7 +75,6 @@ public class FolderCreationProcessTests {
 	/**
 	 * exists() / exists() / !exists()
 	 */
-	@Test
 	public void testTwoCreateFolder() {
 		File file = new File("JUnitTestFolders\\testTwoD1\\testTwoD2\\file.txt");
 		boolean pass = true;
@@ -86,7 +84,7 @@ public class FolderCreationProcessTests {
 		pass = pass && file.getParentFile().getParentFile().exists();
 		pass = pass && file.getParentFile().getParentFile().getParentFile().exists();
 		
-		pass = pass && FolderCreationProcess.CreateFolder(file);
+		FolderCreationProcess.CreateFolder(file);
 		
 		pass = pass && !file.exists();
 		pass = pass && file.getParentFile().exists();
@@ -99,7 +97,6 @@ public class FolderCreationProcessTests {
 	/**
 	 * exists() / exists() / exists()
 	 */
-	@Test
 	public void testThreeCreateFolder() {
 		File file = new File("JUnitTestFolders\\testThreeD1\\testThreeD2\\file.txt");
 		boolean pass = true;
@@ -109,7 +106,7 @@ public class FolderCreationProcessTests {
 		pass = pass && file.getParentFile().getParentFile().exists();
 		pass = pass && file.getParentFile().getParentFile().getParentFile().exists();
 		
-		pass = pass && !FolderCreationProcess.CreateFolder(file);
+		FolderCreationProcess.CreateFolder(file);
 		
 		pass = pass && !file.exists();
 		pass = pass && file.getParentFile().exists();
@@ -122,7 +119,6 @@ public class FolderCreationProcessTests {
 	/**
 	 * exists() / !exists()
 	 */
-	@Test
 	public void testFourCreateFolder() {
 		File file = new File("JUnitTestFolders\\testFourD1\\file.txt");
 		boolean pass = true;
@@ -131,7 +127,7 @@ public class FolderCreationProcessTests {
 		pass = pass && !file.getParentFile().exists();
 		pass = pass && file.getParentFile().getParentFile().exists();
 		
-		pass = pass && FolderCreationProcess.CreateFolder(file);
+		FolderCreationProcess.CreateFolder(file);
 		
 		pass = pass && !file.exists();
 		pass = pass && file.getParentFile().exists();
@@ -142,7 +138,6 @@ public class FolderCreationProcessTests {
 	/**
 	 * exists() / exists()
 	 */
-	@Test
 	public void testFiveCreateFolder() {
 		File file = new File("JUnitTestFolders\\testFiveD1\\file.txt");
 		boolean pass = true;
@@ -151,13 +146,23 @@ public class FolderCreationProcessTests {
 		pass = pass && file.getParentFile().exists();
 		pass = pass && file.getParentFile().getParentFile().exists();
 		
-		pass = pass && !FolderCreationProcess.CreateFolder(file);
+		FolderCreationProcess.CreateFolder(file);
 		
 		pass = pass && !file.exists();
 		pass = pass && file.getParentFile().exists();
 		pass = pass && file.getParentFile().getParentFile().exists();
 	
 		Assert.assertTrue(pass);
+	}
+	
+	public void testFolderCreationFailure() {
+		File file = new File("JUnitTestFolders\\testFolderCreationFailure\\?*\\file.txt");
+		try {
+			FolderCreationProcess.CreateFolder(file);
+			assert false
+		} catch(FolderCreationFailure ex) {
+			assert true
+		}
 	}
 
 }

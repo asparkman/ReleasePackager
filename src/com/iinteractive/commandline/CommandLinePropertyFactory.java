@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.iinteractive.commandline.beans.CommandLineProperty;
 import com.iinteractive.commandline.beans.CommandLinePropertyType;
+import com.iinteractive.packager.exceptions.ProcessInitFailure;
 
 /**
  * The intention of this class is to house the functionality of identifying 
@@ -12,6 +13,8 @@ import com.iinteractive.commandline.beans.CommandLinePropertyType;
  *
  */
 public class CommandLinePropertyFactory {
+	private static final String MATCH_FAILURE = "No match was found given the command line argument: ";
+	private static final String MULTIPLE_MATCHES = "Multiple matches were found for the given command line argument: ";
 	private static ArrayList<CommandLinePropertyType> CommandLinePropertyTypes = new ArrayList<CommandLinePropertyType>();
 
 	/**
@@ -30,7 +33,7 @@ public class CommandLinePropertyFactory {
 	 * @return
 	 * @throws Exception If zero or multiple matches are found.
 	 */
-	public static CommandLineProperty InstantiateProperty(String arg) throws Exception {
+	public static CommandLineProperty InstantiateProperty(String arg) throws ProcessInitFailure {
 		ArrayList<CommandLinePropertyType> matches = new ArrayList<CommandLinePropertyType>();
 		for(CommandLinePropertyType type : CommandLinePropertyTypes) {
 			if(type.isOfType(arg)) {
@@ -39,9 +42,9 @@ public class CommandLinePropertyFactory {
 		}
 		
 		if(matches.size() == 0) {
-			throw new Exception("No match was found given the command line argument: " + arg);
+			throw new ProcessInitFailure(MATCH_FAILURE + arg);
 		} else if(matches.size() > 1) {
-			throw new Exception("Multiple matches were found for the given command line argument: " + arg);
+			throw new ProcessInitFailure(MULTIPLE_MATCHES + arg);
 		} else {
 			return new CommandLineProperty(matches.get(0), arg);
 		}

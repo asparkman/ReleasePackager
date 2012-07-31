@@ -2,7 +2,11 @@ package com.iinteractive.packager.beans;
 
 import java.io.File;
 
+import com.iinteractive.packager.exceptions.ValidationFailure;
+
 public class Package {
+	public static final String PACKAGE_DIR_DNE = "The package directory provided does not exist. ";
+	
 	public Package(String packageDirectory) {
 		super();
 		setPackageDirectory(packageDirectory);
@@ -26,10 +30,10 @@ public class Package {
 		this.filesSubDirectory = filesSubDirectory;
 	}
 	
-	public static void validatePackageDirectory(String packageDirectory) throws Exception {
+	public static void validatePackageDirectory(String packageDirectory) throws ValidationFailure {
 		File validator = new File(packageDirectory);
 		if(!validator.exists()) {
-			throw new Exception("The package directory provided does not exist.");
+			throw new ValidationFailure(PACKAGE_DIR_DNE + validator.getAbsolutePath());
 		}
 	}
 }

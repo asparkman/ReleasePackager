@@ -4,11 +4,15 @@ import java.util.ArrayList;
 
 import com.iinteractive.commandline.beans.CommandLineProperty;
 import com.iinteractive.commandline.beans.CommandLinePropertyType;
+import com.iinteractive.packager.exceptions.ProcessInitFailure;
 
 public class Operation {
-	public Operation(ArrayList<CommandLineProperty> properties) throws Exception {
+	public static String UNKNOWN_PROPERTY = "Unknown command line property";
+	public static String UNEXPECTED_NUM_PROPERTIES = "Received an unexpected number of properties.";
+	
+	public Operation(ArrayList<CommandLineProperty> properties) throws ProcessInitFailure {
 		if(properties.size() != 2) {
-			throw new Exception("Received an unexpected number of properties.");
+			throw new ProcessInitFailure(UNEXPECTED_NUM_PROPERTIES);
 		}
 		//TODO: Validate that both CommandLineProperties are to be picked up.
 		for(int i = 0; i < properties.size(); i++) {
@@ -17,7 +21,7 @@ public class Operation {
 			} else if(properties.get(i).getType().equals(OPERATION_FILE_TYPE)) {
 				operationFile = properties.get(i);
 			} else {
-				throw new Exception("Unknown command line property");
+				throw new ProcessInitFailure(UNKNOWN_PROPERTY);
 			}
 		}
 	}

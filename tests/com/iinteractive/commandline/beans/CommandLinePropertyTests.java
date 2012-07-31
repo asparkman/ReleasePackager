@@ -1,13 +1,13 @@
 package com.iinteractive.commandline.beans;
 
 import junit.framework.Assert;
-
-import org.junit.Test;
+import junit.framework.TestCase;
 
 import com.iinteractive.commandline.beans.CommandLineProperty;
 import com.iinteractive.commandline.beans.CommandLinePropertyType;
+import com.iinteractive.packager.exceptions.ProcessInitFailure;
 
-public class CommandLinePropertyTests {
+public class CommandLinePropertyTests extends TestCase {
 	/**
 	 * Tests:
 	 * 		Type: "ABC", Argument: "ABC", Output: ""
@@ -18,7 +18,6 @@ public class CommandLinePropertyTests {
 	 * 		Type: "ABC", Argument: "ADC1", Output: Exception
 	 * 		Type: "ABC", Argument: "ABD1", Output: Exception
 	 */
-	@Test
 	public void testSetValue() {
 		CommandLinePropertyType type = new CommandLinePropertyType("A", "B", "C");
 		try {
@@ -34,17 +33,17 @@ public class CommandLinePropertyTests {
 				};
 			try {
 				new CommandLineProperty(type, "DBC1").getValue();
-			} catch(Exception ex) {
+			} catch(ProcessInitFailure ex) {
 				tests[4] = "true";
 			}
 			try {
 				new CommandLineProperty(type, "ADC1").getValue();
-			} catch(Exception ex) {
+			} catch(ProcessInitFailure ex) {
 				tests[5] = "true";
 			}
 			try {
 				new CommandLineProperty(type, "ABD1").getValue();
-			} catch(Exception ex) {
+			} catch(ProcessInitFailure ex) {
 				tests[6] = "true";
 			}
 			boolean pass = true;
