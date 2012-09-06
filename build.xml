@@ -131,7 +131,7 @@
     </target>
 	<target name="junit" depends="AllTests, junitreport" />
 	<target name="package" depends="build">
-		<jar destfile="com.bi.aggrenox.ws.jar" basedir="bin">
+		<jar destfile="release-packager.jar" basedir="bin">
 			<fileset dir="bin">
 				<exclude name="**/*.java"/>
 				<exclude name="**/*.groovy"/>
