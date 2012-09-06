@@ -16,7 +16,7 @@ public class PackageTests extends TestCase {
 	public static final String FOLDER_NAME_2 = "JUnitTestFolders2";
 	public static final File FOLDER_2 = new File(FOLDER_NAME_2);
 	
-	public static final String RELEASES_SUBDIR = "\Release-Files";
+	public static final String RELEASES_SUBDIR = "/Release-Files";
 	
 	public void setUp() {
 		if(!FOLDER_1.exists()) {
