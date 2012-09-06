@@ -12,7 +12,7 @@ import com.iinteractive.packager.beans.Source;
 import com.iinteractive.packager.exceptions.ValidationFailure
 
 public class SourceTests extends TestCase {
-	public static final String RELEASES_SUBDIR = """\\Release-Files""";
+	public static final String RELEASES_SUBDIR = "\Release-Files";
 	
 	public static final String EXISTS_DIR_NAME = "exists";
 	public static final String DNE_DIR_NAME = "dne";
