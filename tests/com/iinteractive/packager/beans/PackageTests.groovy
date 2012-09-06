@@ -33,15 +33,13 @@ public class PackageTests extends TestCase {
 	
 	public void testPackage() {
 		Package test1 = new Package(FOLDER_NAME_1);
-		boolean pass = test1.getFilesSubDirectory().equals(FOLDER_NAME_1 + RELEASES_SUBDIR) && test1.getPackageDirectory().equals(FOLDER_NAME_1);
-		Assert.assertTrue(pass);
+		assert test1.getFilesSubDirectory().equals(FOLDER_NAME_1 + RELEASES_SUBDIR) && test1.getPackageDirectory().equals(FOLDER_NAME_1);
 	}
 
 	public void testSetPackageDirectory() {
 		Package test1 = new Package(FOLDER_NAME_1);
 		test1.setPackageDirectory(FOLDER_NAME_2);
-		boolean pass = test1.getFilesSubDirectory().equals(FOLDER_NAME_2 + RELEASES_SUBDIR) && test1.getPackageDirectory().equals(FOLDER_NAME_2);
-		Assert.assertTrue(pass);
+		assert test1.getFilesSubDirectory().equals(FOLDER_NAME_2 + RELEASES_SUBDIR) && test1.getPackageDirectory().equals(FOLDER_NAME_2);
 	}
 
 	/*
