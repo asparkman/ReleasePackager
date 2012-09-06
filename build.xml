@@ -26,8 +26,8 @@
         <pathelement location="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/plugin_dsld_support/"/>
     </path>
     <path id="JUnit 4.libraryclasspath">
-        <pathelement location="\\fs\build\Releases\Groovy/org.junit_4.8.2.v4_8_2_v20110321-1705/junit.jar"/>
-        <pathelement location="\\fs\build\Releases\Groovy/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+        <pathelement location="\\fs\build\Releases\JUnit\org.junit_4.8.2.v4_8_2_v20110321-1705\junit.jar"/>
+        <pathelement location="\\fs\build\Releases\JUnit\org.hamcrest.core_1.1.0.v20090501071000.jar"/>
     </path>
 	
 	
