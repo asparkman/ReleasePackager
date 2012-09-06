@@ -40,7 +40,9 @@
     	<pathelement location="log4j-1.2.17.jar"/>
     </path>
 	
-	
+	<taskdef name="groovyc"
+			         classname="org.codehaus.groovy.ant.Groovyc"
+			         classpathref="Bundler.classpath"/>
 	
     <target name="init">
         <mkdir dir="bin"/>
