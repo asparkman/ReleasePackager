@@ -16,7 +16,7 @@ public class PackageTests extends TestCase {
 	public static final String FOLDER_NAME_2 = "JUnitTestFolders2";
 	public static final File FOLDER_2 = new File(FOLDER_NAME_2);
 	
-	public static final String RELEASES_SUBDIR = "/Release-Files";
+	
 	
 	public void setUp() {
 		if(!FOLDER_1.exists()) {
@@ -33,13 +33,13 @@ public class PackageTests extends TestCase {
 	
 	public void testPackage() {
 		Package test1 = new Package(FOLDER_NAME_1);
-		assert test1.getFilesSubDirectory().equals(FOLDER_NAME_1 + RELEASES_SUBDIR) && test1.getPackageDirectory().equals(FOLDER_NAME_1);
+		assert test1.getFilesSubDirectory().equals(FOLDER_NAME_1 + Package.RELEASES_SUBDIR) && test1.getPackageDirectory().equals(FOLDER_NAME_1);
 	}
 
 	public void testSetPackageDirectory() {
 		Package test1 = new Package(FOLDER_NAME_1);
 		test1.setPackageDirectory(FOLDER_NAME_2);
-		assert test1.getFilesSubDirectory().equals(FOLDER_NAME_2 + RELEASES_SUBDIR) && test1.getPackageDirectory().equals(FOLDER_NAME_2);
+		assert test1.getFilesSubDirectory().equals(FOLDER_NAME_2 + Package.RELEASES_SUBDIR) && test1.getPackageDirectory().equals(FOLDER_NAME_2);
 	}
 
 	/*

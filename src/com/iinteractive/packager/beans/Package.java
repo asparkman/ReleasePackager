@@ -6,6 +6,7 @@ import com.iinteractive.packager.exceptions.ValidationFailure;
 
 public class Package {
 	public static final String PACKAGE_DIR_DNE = "The package directory provided does not exist. ";
+	public static final String RELEASES_SUBDIR = "\\Release-Files";
 	
 	public Package(String packageDirectory) {
 		super();
@@ -20,7 +21,7 @@ public class Package {
 	}
 	public void setPackageDirectory(String packageDirectory) {
 		this.packageDirectory = packageDirectory;
-		setFilesSubDirectory(packageDirectory + "\\Release-Files");
+		setFilesSubDirectory(packageDirectory + RELEASES_SUBDIR);
 	}
 	
 	public String getFilesSubDirectory() {
