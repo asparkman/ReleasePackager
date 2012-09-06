@@ -138,6 +138,7 @@
 				<exclude name="**/DirectoryUtility.class"/>
 				<exclude name="**/IDirectoryUtility.class"/>
 			</fileset>
+			<zipfileset includes="log4j-1.2.17.jar"/>
 		</jar>
 	</target>
 </project>
