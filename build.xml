@@ -76,20 +76,22 @@
     	
     	<groovyc destdir="bin" srcdir="src" >
             <classpath refid="Bundler.classpath"/>
+    		<javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+	            <src path="src"/>
+	            <classpath refid="Bundler.classpath"/>
+	        </javac>
         </groovyc>
     	
-    	<javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
-            <src path="src"/>
-            <classpath refid="Bundler.classpath"/>
-        </javac>
     	
-    	<groovyc destdir="bin" srcdir="tests" >
-        	<classpath refid="Bundler.classpath"/>
-        </groovyc>
+    	
+    	
     	
     	<javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
             <src path="tests"/>
             <classpath refid="Bundler.classpath"/>
+    		<groovyc destdir="bin" srcdir="tests" >
+	        	<classpath refid="Bundler.classpath"/>
+	        </groovyc>
         </javac>
     </target>
 	
