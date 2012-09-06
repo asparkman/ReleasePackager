@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. -->
+<project basedir="." default="build" name="Bundler">
+    <property environment="env"/>
+    <property name="junit.output.dir" value="junit"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+    <path id="Groovy Libraries.libraryclasspath">
+        <pathelement location="\\fs\build\Releases\Groovy\org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE\lib\groovy-all-2.0.0.jar"/>
+        <pathelement location="\\fs\build\Releases\Groovy\org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE\lib\antlr-2.7.7.jar"/>
+        <pathelement location="\\fs\build\Releases\Groovy\org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE\lib\asm-4.0.jar"/>
+        <pathelement location="\\fs\build\Releases\Groovy\org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE\lib\asm-tree-4.0.jar"/>
+        <pathelement location="\\fs\build\Releases\Groovy\org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE\lib\bsf-2.4.0.jar"/>
+        <pathelement location="\\fs\build\Releases\Groovy\org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE\lib\commons-cli-1.2.jar"/>
+        <pathelement location="\\fs\build\Releases\Groovy\org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE\lib\ivy-2.2.0.jar"/>
+        <pathelement location="\\fs\build\Releases\Groovy\org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE\lib\jline-1.0.jar"/>
+        <pathelement location="\\fs\build\Releases\Groovy\org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE\lib\servlet-api-2.4.jar"/>
+    </path>
+    <path id="Groovy DSL Support.libraryclasspath">
+        <pathelement location="../../../.groovy/greclipse/global_dsld_support"/>
+        <pathelement location="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/plugin_dsld_support/"/>
+    </path>
+    <path id="JUnit 4.libraryclasspath">
+        <pathelement location="\\fs\build\Releases\Groovy/org.junit_4.8.2.v4_8_2_v20110321-1705/junit.jar"/>
+        <pathelement location="\\fs\build\Releases\Groovy/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+    </path>
+	
+	
+	
+    <path id="Bundler.classpath">
+        <pathelement location="bin"/>
+        <path refid="Groovy Libraries.libraryclasspath"/>
+        <path refid="Groovy DSL Support.libraryclasspath"/>
+        <path refid="JUnit 4.libraryclasspath"/>
+    	<pathelement location="log4j-1.2.17.jar"/>
+    </path>
+	
+	
+	
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+            	<exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+                <exclude name="**/*.groovy"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="tests">
+            	<exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+                <exclude name="**/*.groovy"/>
+            </fileset>
+        </copy>
+    </target>
+	
+	
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+	
+	
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project,junit" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+    	
+    	<groovyc destdir="bin" srcdir="src" >
+            <classpath refid="Bundler.classpath"/>
+        </groovyc>
+    	
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+            <src path="tests"/>
+            <classpath refid="Bundler.classpath"/>
+        </javac>
+    	
+    	
+    	<groovyc destdir="bin" srcdir="tests" >
+        	<classpath refid="Bundler.classpath"/>
+        </groovyc>
+    	
+    	
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="Bundler.classpath"/>
+        </javac>
+    	
+    </target>
+	
+	
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+	<target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="\\fs\build\Releases\Eclipse" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="\\fs\build\Releases\Eclipse" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+	
+	
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+	
+	
+    <target name="AllTests">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.iinteractive.utility.AllTests" todir="${junit.output.dir}"/>
+            <classpath refid="Bundler.classpath"/>
+        </junit>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
+    </target>
+	<target name="junit" depends="AllTests, junitreport" />
+	<target name="package" depends="build">
+		<jar destfile="com.bi.aggrenox.ws.jar" basedir="bin">
+			<fileset dir="bin">
+				<exclude name="**/*.java"/>
+				<exclude name="**/*.groovy"/>
+				<exclude name="**/*.properties"/>
+				<exclude name="**/Test*"/>
+				<exclude name="**/*Tests.class"/>
+				<exclude name="**/DirectoryUtility.class"/>
+				<exclude name="**/IDirectoryUtility.class"/>
+			</fileset>
+		</jar>
+	</target>
+</project>

@@ -7,7 +7,6 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import com.iinteractive.commandline.CommandLinePropertyFactory;
-import com.iinteractive.commandline.beans.CommandLineProperty;
 import com.iinteractive.commandline.beans.CommandLinePropertyType;
 import com.iinteractive.packager.exceptions.ProcessInitFailure;
 
