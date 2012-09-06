@@ -128,7 +128,11 @@
     </target>
 	<target name="junit" depends="AllTests, junitreport" />
 	<target name="package" depends="build">
-		<jar destfile="release-packager.jar" basedir="bin" manifest="MANIFEST.MF">
+		<jar destfile="release-packager.jar" basedir="bin">
+			<manifest>
+                <attribute name="Main-Class" value="com.iinteractive.packager.Driver"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
 			<fileset dir="bin">
 				<exclude name="**/*.java"/>
 				<exclude name="**/*.groovy"/>
@@ -138,7 +142,18 @@
 				<exclude name="**/DirectoryUtility.class"/>
 				<exclude name="**/IDirectoryUtility.class"/>
 			</fileset>
-			<zipfileset dir="./" includes="log4j-1.2.17.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/lib/groovy-all-2.0.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/lib/antlr-2.7.7.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/lib/asm-4.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/lib/asm-tree-4.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/lib/bsf-2.4.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/lib/commons-cli-1.2.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/lib/ivy-2.2.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/lib/jline-1.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/lib/servlet-api-2.4.jar"/>
+            <fileset dir="\\fs\build\Releases\Groovy/.groovy/greclipse/global_dsld_support"/>
+            <fileset dir="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/plugin_dsld_support/"/>
+            <zipfileset excludes="META-INF/*.SF" src="log4j-1.2.17.jar"/>
 		</jar>
 	</target>
 </project>
