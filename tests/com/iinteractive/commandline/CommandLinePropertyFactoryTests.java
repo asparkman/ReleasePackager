@@ -78,6 +78,7 @@ public class CommandLinePropertyFactoryTests extends TestCase {
 	public static void clearFactoryTypes() throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException {
 		Field field = CommandLinePropertyFactory.class.getDeclaredField("CommandLinePropertyTypes");
 		field.setAccessible(true);
+		@SuppressWarnings("unchecked")
 		ArrayList<CommandLinePropertyType> types = (ArrayList<CommandLinePropertyType>) field.get(null);
 		types.clear();
 	}
