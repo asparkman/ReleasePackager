@@ -89,10 +89,10 @@ public class OperationTests extends TestCase {
 		
 		try {
 			test1 = new Operation(input1);
-			pass = false;
 		} catch (NullPointerException e) {
 			pass = false;
 		} catch (ProcessInitFailure e) {
+			pass = false;
 		}
 		
 		try {

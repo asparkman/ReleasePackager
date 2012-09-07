@@ -11,7 +11,7 @@ public class Operation {
 	public static String UNEXPECTED_NUM_PROPERTIES = "Received an unexpected number of properties.";
 	
 	public Operation(ArrayList<CommandLineProperty> properties) throws ProcessInitFailure {
-		if(properties.size() != 2) {
+		if(properties.size() != 1 && properties.size() != 2) {
 			throw new ProcessInitFailure(UNEXPECTED_NUM_PROPERTIES);
 		}
 		//TODO: Validate that both CommandLineProperties are to be picked up.
