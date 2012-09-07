@@ -143,7 +143,7 @@
 				<exclude name="**/IDirectoryUtility.class"/>
 			</fileset>
 			<zipfileset excludes="META-INF/*.SF" src="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/lib/groovy-all-2.0.0.jar"/>
-            <zipfileset excludes="META-INF/*.SF" src="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/lib/antlr-2.7.7.jar"/>
+            <!--<zipfileset excludes="META-INF/*.SF" src="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/lib/antlr-2.7.7.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/lib/asm-4.0.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/lib/asm-tree-4.0.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/lib/bsf-2.4.0.jar"/>
@@ -152,7 +152,7 @@
             <zipfileset excludes="META-INF/*.SF" src="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/lib/jline-1.0.jar"/>
             <zipfileset excludes="META-INF/*.SF" src="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/lib/servlet-api-2.4.jar"/>
             <fileset dir="\\fs\build\Releases\Groovy/.groovy/greclipse/global_dsld_support"/>
-            <fileset dir="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/plugin_dsld_support/"/>
+            <fileset dir="\\fs\build\Releases\Groovy/org.codehaus.groovy_2.0.0.xx-20120703-1400-e37-RELEASE/plugin_dsld_support/"/>-->
             <zipfileset excludes="META-INF/*.SF" src="log4j-1.2.17.jar"/>
 		</jar>
 	</target>
